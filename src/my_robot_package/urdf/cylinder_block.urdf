@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<robot name="object">
+  <!-- 定义物块 -->
+  <link name="object_link">
+    <visual>
+      <geometry>
+        <cylinder radius="0.05" length="0.02"/>  <!-- Cylinder dimensions: radius 0.05m, height 0.02m -->
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>  <!-- Grey color -->
+      </material>
+    </visual>
+    <collision>
+      <geometry>
+        <cylinder radius="0.05" length="0.02"/>  <!-- Cylinder dimensions: radius 0.05m, height 0.02m -->
+      </geometry>
+      <material name="Grey">
+        <color rgba="0.5 0.5 0.5 1.0"/>  <!-- Grey color -->
+      </material>
+    </collision>
+    <inertial>
+      <mass value="0.1"/> <!-- 物块的质量 -->
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <inertia ixx="0.001" ixy="0.0" ixz="0.0" iyy="0.001" iyz="0.0" izz="0.001"/> <!-- 物块的惯性 -->
+    </inertial>
+    
+
+  </link>
+
+    <gazebo reference="object_link">
+            <material>Gazebo/Yellow</material>
+    </gazebo>
+
+
+</robot>

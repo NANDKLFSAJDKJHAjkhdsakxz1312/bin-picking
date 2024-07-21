@@ -1,0 +1,29 @@
+<launch>
+  <!-- 启动Gazebo服务器 -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find gazebo_ros)/worlds/empty.world"/>
+  </include>
+
+  <!-- 加载URDF模型 -->
+  <param name="robot_description" command="$(find xacro)/xacro '$(find my_robot_package)/urdf/robot.urdf'" />
+    <!-- 启动Gazebo并加载模型 -->
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-urdf -model depth_camera_robot -param robot_description" output="screen" />
+
+  <!-- 启动机器人状态发布器 -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <param name="publish_frequency" type="double" value="50.0" />
+    <param name="tf_prefix" type="string" value="" />
+  </node>
+
+  <!-- 启动Joint State Publisher -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" respawn="false" output="screen" />
+
+
+  <node name="sync_gazebo_to_moveit" pkg="robot_gazebo" type="sync_gazebo_to_moveit.py" output="screen" />
+
+
+  <param name="box_block" command="$(find xacro)/xacro '$(find my_robot_package)/urdf/box_block.urdf'" />
+  <node name="spawn_box_block" pkg="gazebo_ros" type="spawn_model" args="-urdf -model box_block -param box_block -x -0.6 -y 0.6 -z 1.0" output="screen" />
+   <!-- 启动RViz用于可视化 -->
+  <node name="rviz" pkg="rviz" type="rviz" required="true" output="screen" args="-d $(find my_robot_package)/config/saved.rviz"/>
+</launch>

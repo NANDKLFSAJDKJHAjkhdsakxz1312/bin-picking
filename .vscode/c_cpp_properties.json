@@ -1,0 +1,27 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/jiangnan/cw/devel/include/**",
+        "/opt/ros/noetic/include/**",
+        "/home/jiangnan/cw/src/my_robot_description/include/**",
+        "/home/jiangnan/labor_robotik/src/my_robot_package/include/**",
+        "/home/jiangnan/cw/src/myrobot_gazebo/include/**",
+        "/home/jiangnan/cw/src/realsense_ros_gazebo/include/**",
+        "/home/jiangnan/cw/src/self_designed/include/**",
+        "/home/jiangnan/test2/src/myrobot_description/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

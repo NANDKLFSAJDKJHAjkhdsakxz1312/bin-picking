@@ -1,0 +1,10 @@
+<launch>
+
+    <rosparam file="$(find robot_gazebo)/config/trajectory_controllers.yaml" command="load"/>
+
+    <rosparam file="$(find robot_gazebo)/config/pid_gains.yaml" command="load"/>
+
+    <node name="arm_controller_spawner" pkg="controller_manager" type="spawner" respawn="false"
+          output="screen" ns="/robot_with_arm_and_camera" args="arm_joint_controller"/>
+    
+</launch>

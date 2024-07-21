@@ -1,0 +1,74 @@
+<launch>
+
+  <!-- these are the arguments you can pass this launch file, for example paused:=true -->
+  <arg name="paused" default="false"/>
+  <arg name="use_sim_time" default="true"/>
+  <arg name="gui" default="true"/>
+  <arg name="headless" default="false"/>
+  <arg name="debug" default="false"/>
+
+  <!-- We resume the logic in empty_world.launch -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="debug" value="$(arg debug)" />
+    <arg name="gui" value="$(arg gui)" />
+    <arg name="paused" value="$(arg paused)"/>
+    <arg name="use_sim_time" value="$(arg use_sim_time)"/>
+    <arg name="headless" value="$(arg headless)"/>
+    <!-- <arg name="world_name" value="$(find myrobot_gazebo)/world/feeding_place.world"/> -->
+  </include>
+
+  <!-- Load the URDF into the ROS Parameter Server -->
+  <!-- <param name="robot_description" command="$(find xacro)/xacro  $(find my_robot_package)/urdf/myrobot.xacro" />  -->
+  <param name="robot_description" command="$(find xacro)/xacro  $(find my_robot_package)/urdf/robot.urdf" />
+  <!-- Run a python script to the send a service call to gazebo_ros to spawn a URDF robot -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" respawn="false" output="screen"
+	args="-urdf -model robot_with_arm_and_camera -param robot_description -robot_namespace robot_with_arm_and_camera"/>
+
+  <!-- Load the table URDF file into the parameter server -->
+  <param name="table_description" command="$(find xacro)/xacro '$(find my_robot_package)/urdf/table.urdf'" />
+
+  <!-- Spawn the table in Gazebo -->
+  <node name="spawn_table" pkg="gazebo_ros" type="spawn_model" args="-param table_description -urdf -model table -x -0.7 -y 0.7 -z 0.74" />
+
+   <!-- 延时加载 -->
+  <node name="delay_node" pkg="robot_gazebo" type="delay_node.py" output="screen">
+    <param name="delay_time" value="5"/>
+  </node>
+
+  <!-- Load the cylinder block URDF file into the parameter server -->
+  <param name="cylinder_block_description" command="$(find xacro)/xacro '$(find my_robot_package)/urdf/cylinder_block.urdf'" />
+
+  <!-- Spawn the cylinder block on the table -->
+  <node name="spawn_cylinder_block" pkg="gazebo_ros" type="spawn_model" args="-param cylinder_block_description -urdf -model cylinder_block -x -0.9 -y 0.9 -z 2" />
+
+  <!-- Load the box block URDF file into the parameter server -->
+  <param name="box_block_description" command="$(find xacro)/xacro '$(find my_robot_package)/urdf/box_block.urdf'" />
+
+  <!-- Spawn the box block on the table -->
+  <node name="spawn_box_block" pkg="gazebo_ros" type="spawn_model" args="-param box_block_description -urdf -model box_block -x -0.6 -y 0.6 -z 2" />
+
+  <param name="blue_box_description" command="$(find xacro)/xacro $(find my_robot_package)/urdf/blue_box.urdf"/>
+
+  <node name="spawn_blue_box" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-param blue_box_description -urdf -model blue_box -x 1 -y -1 -z 0.25 "/>
+
+  <!-- Load the camera URDF file into the parameter server -->
+  <!-- <param name="camera_description" command="$(find xacro)/xacro '$(find my_robot_package)/urdf/camera.xacro'" /> -->
+
+  <!-- Spawn the camera on the table -->
+  <!-- <node name="spawn_camera" pkg="gazebo_ros" type="spawn_model" args="-param camera_description -urdf -model camera " /> -->
+
+  <!-- <node name="spawn_camera1" pkg="gazebo_ros" type="spawn_model" args="-param camera_description1 -unpause -urdf -model camera_tes -x -0.7 -y 0.7 -z 2.5 -R 3.1415 -P 1.5708 -Y 3.1415" />
+  <param name="camera_description1" command="$(find xacro)/xacro '$(find my_robot_package)/urdf/camera_test.xacro'" /> -->
+
+  <!-- 插入棋盘模型 -->
+  <!-- <node name="spawn_model" pkg="gazebo_ros" type="spawn_model" output="screen"
+        args="-file $(find my_robot_package)/urdf/checkerboard_9_7_0_11/checkerboard.sdf -sdf -model checkerboard_9_7_0_1 -x -0.6 -y 0.7 -z 1.0" /> -->
+        
+  <!-- <param name="robot_description" command="$(find xacro)/xacro '$(find my_robot_package)/urdf/camera.xacro'"/> -->
+  <!-- 启动深度相机插件 -->
+  <!-- <node name="spawn_camera" pkg="gazebo_ros" type="spawn_model" args="-file $(find my_robot_package)/urdf/camera.xacro -urdf -z 1 -model camera"/> -->
+
+
+</launch>
+

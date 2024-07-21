@@ -1,0 +1,5 @@
+robot_with_arm_and_camera:
+  # Publish all joint states -----------------------------------
+  joint_state_controller:
+    type: joint_state_controller/JointStateController
+    publish_rate: 100

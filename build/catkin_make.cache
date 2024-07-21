@@ -1,0 +1,2 @@
+detection_msgs:my_robot_config:my_robot_package:robot_gazebo:yolov5_ros
+-DCATKIN_DEVEL_PREFIX=/home/jiangnan/labor_robotik/devel -DCMAKE_INSTALL_PREFIX=/home/jiangnan/labor_robotik/install -G Unix Makefiles

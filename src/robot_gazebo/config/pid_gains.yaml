@@ -1,0 +1,22 @@
+# six_dof_arm:
+#   gazebo_ros_control:
+#     pid_gains:
+#       # gains:
+#       joint1:   {p: 1000.0, i: 100, d: 0.1, i_clamp: 0.0}
+#       joint2:   {p: 1000.0, i: 100, d: 0.1, i_clamp: 0.0}
+#       joint3:   {p: 1000.0, i: 100, d: 0.1, i_clamp: 0.0}
+#       joint4:   {p: 1000.0, i: 100, d: 0.1, i_clamp: 0.0}
+#       joint5:   {p: 1000.0, i: 100, d: 0.1, i_clamp: 0.0}
+#       joint6:   {p: 1000.0, i: 100, d: 0.1, i_clamp: 0.0}
+      
+robot_with_arm_and_camera:
+  gazebo_ros_control:
+    pid_gains:
+      # gains:
+      joint1:   {p: 10000.0, i: 100, d: 0.1, i_clamp: 0.0}
+      joint2:   {p: 10000.0, i: 100, d: 0.1, i_clamp: 0.0}
+      joint3:   {p: 10000.0, i: 100, d: 0.1, i_clamp: 0.0}
+      joint4:   {p: 10000.0, i: 100, d: 0.1, i_clamp: 0.0}
+      joint5:   {p: 10000.0, i: 100, d: 0.1, i_clamp: 0.0}
+      joint6:   {p: 10000.0, i: 100, d: 0.1, i_clamp: 0.0}
+      vacuum_gripper_joint: {p: 10000.0, i: 100, d: 0.1, i_clamp: 0.0}

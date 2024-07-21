@@ -1,0 +1,27 @@
+<launch>
+  
+    <!-- Launch Gazebo  -->
+    <include file="$(find robot_gazebo)/launch/gazebo_world.launch" />
+
+
+
+
+    <!-- ros_control arm launch file -->
+    <include file="$(find robot_gazebo)/launch/gazebo_states.launch" />   
+
+    <!-- ros_control trajectory control dof arm launch file -->
+    <include file="$(find robot_gazebo)/launch/trajectory_controllers.launch" />
+
+    <!-- moveit launch file -->
+    <include file="$(find my_robot_config)/launch/moveit_planning_execution.launch">
+
+    </include>
+     <!-- 延时加载 -->
+    <node name="delay_node1" pkg="robot_gazebo" type="delay_node.py" output="screen">
+        <param name="delay_time" value="5"/>
+    </node>
+
+    <node name="sync_gazebo_to_moveit" pkg="robot_gazebo" type="sync_gazebo_to_moveit.py" output="screen" />
+    <node name="camera_info_pub" pkg="robot_gazebo" type="camera_info_publisher.py" output="screen" />
+
+</launch>
