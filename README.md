@@ -19,6 +19,8 @@ The implementation of the robotic arm involved constructing a seven-degree-of-fr
 ### 2.2 RGBD Camera
 The RGBD camera system was constructed using a Gazebo plugin to create a comprehensive vision system. This camera is crucial for integrating with the YOLOv5 framework, providing the necessary image inputs for object detection and recognition tasks. The RGBD camera captures both color (RGB) and depth (D) information, significantly enhancing the perception capabilities of the robotic system.
 
+![RGBD Camera](rgbd_camera.png)
+
 ## 3. Controlling and Planning
 
 ### 3.1 Controller Setup
@@ -47,43 +49,43 @@ The vision system enables the robotic arm to perform tasks such as object detect
 ### 4.1 Data Acquisition
 A diverse and representative dataset was acquired by continuously adjusting the camera’s pose to capture images of objects from different angles and distances. The RGBD camera collected 200 images, ensuring a comprehensive dataset that enhances the training process.
 
-![Data Acquisition](./images/first.png)
+![Data Acquisition](first.png)
 *Fig 1. Data Acquisition: RGBD camera capturing images from various angles and distances in the Gazebo environment.*
 
-![Data Annotation](./images/second.png)
+![Data Annotation](second.png)
 *Fig 2. Data Annotation: Manually labeling the dataset to identify and classify objects.*
 
 ### 4.2 Model Training
 The collected dataset was used to train the YOLOv5 model. Starting with a pre-trained YOLOv5 model, it was fine-tuned using the acquired dataset to improve accuracy and efficiency in object detection.
 
-![Model Training](./images/third.png)
+![Model Training](third.png)
 *Fig 3. Model Training: Fine-tuning the pre-trained YOLOv5 model with the annotated dataset.*
 
-![Confusion Matrix](./images/seven.png)
+![Confusion Matrix](seven.png)
 *Fig 4. Confusion Matrix: Evaluating the performance of the trained YOLOv5 model.*
 
-![Precision-Confidence Curve](./images/eight.png)
+![Precision-Confidence Curve](eight.png)
 *Fig 5. Precision-Confidence Curve: Analysis of the precision at various confidence levels.*
 
-![Recall-Confidence Curve](./images/nine.png)
+![Recall-Confidence Curve](nine.png)
 *Fig 6. Recall-Confidence Curve: Analysis of the recall at various confidence levels.*
 
 ### 4.3 Camera Calibration
 Camera calibration ensures accurate depth and spatial measurements. The calibration process involves determining the camera’s intrinsic and extrinsic parameters to align visual data correctly with the robot’s coordinate system.
 
-![Camera Calibration](./images/fourth.png)
+![Camera Calibration](fourth.png)
 *Fig 7. Camera Calibration: Setting intrinsic and extrinsic parameters for accurate depth and spatial measurements.*
 
 ### 4.4 Detection
 With the camera calibrated and the YOLOv5 model trained, the vision system performs real-time object detection. The camera continuously publishes image data, which is processed by the YOLOv5 model to detect and locate objects within the scene.
 
-![Real-time Detection](./images/fifth.png)
+![Real-time Detection](fifth.png)
 *Fig 8. Real-time Detection: The YOLOv5 model detecting and annotating objects with bounding boxes and class labels.*
 
 ## 5. Integrated System and Bin Picking Task
 The final stage involved integrating the vision system, control system, and planning system within the Gazebo environment to accomplish the bin picking task. The RGBD camera’s data, YOLOv5 detection model, PID controller, and Moveit! planning framework were integrated to perform bin picking, specifically targeting red blocks and placing them into a blue bin.
 
-![Integrated System](./images/sixth.png)
+![Integrated System](sixth.png)
 *Fig 9. Integrated System: The robotic arm performing the bin picking task by moving a red block to a blue bin within the Gazebo environment.*
 
 ## 6. Limitations and Future Work
